@@ -1,0 +1,102 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	</head>
+	<body>
+		<div id="body" style="font-family:%22Helvetica Neue%22, Helvetica, Arial, sans-serif; font-size:16px; color:#808080; width:570px; margin:0 auto">
+			<table background="" class="repository" style="padding:0px; border:0px; width:100%; color:#606060; font-size:20px; margin-bottom:15px; margin-top:15px; ">
+				<tr style="padding:0px; border:0px; ">
+					<td style="padding:0px; border:0px; vertical-align:middle">
+						<img src="https://0.gravatar.com/avatar/3b0b52ad2211a26c4e1cefb472e09cbe?s=40&amp;d=https%3A%2F%2Ftravis-ci.org%2Fimages%2Fmailer%2Fmascot-avatar-40px.png" style="vertical-align:middle; width:40px; height:40px">
+						<span style="vertical-align:middle; margin-left:3px">
+							<strong>
+								<a href="##repository_url##" style="text-decoration:underline; color:#606060">
+									##repository##
+								</a>
+							</strong>
+							(<a href="##branch_url##" style="text-decoratio=
+n:underline; color:#606060">##branch##</a>)
+						</span>
+					</td>
+				</tr>
+			</table>
+			<div class="failure" id="build" style="border-radius:5px; padding:0px; width:570px; font-size:13px">
+				<div class="content">
+					<table style="padding:0px; border:0px; width:100%; border-spacing:0">
+						<thead>
+							<tr style="padding:0px; border:0px; font-weight:700; font-size:18px; background-color:#fdcdce; color:#df192a">
+								<td style="border:0px; border-top:1px solid #808080; border-bottom:1px solid #adadad; width:50px; padding:0px; text-align:center; vertical-align:middle; padding-top:5px; border-left:1px solid #606060; border-top-left-radius:5px">
+									<div class="status-image" style="width:25px; background-size:25px; height:30px; margin-left:15px; margin-top:0px; vertical-align:middle">
+										<img height="25" src="https://travis-ci.org/images/mailer/failed.png" width="25">
+									</div>
+								</td>
+								<td class="build-message" style="border:0px; padding:0px 20px 0px 0px; vertical-align:middle; border-top:1px solid #808080; border-bottom:1px solid #adadad">
+									<span style="display:inline-block; margin-top:12px; vertical-align:middle">
+										<a href="##build_url##" style="font-weight:bold; text-decoration:underline; color:#df192a">
+											Build ###build_number## was broken.
+										</a>
+									</span>
+									<img height="45" src="https://travis-ci.org/images/mailer/arrow-failed.png" style="float: right;">
+								</td>
+								<td align="right" class="time" style="border:0px; font-weight:normal; font-size:12px; padding:0px 20px 0px 0px; vertical-align:middle; border-top:1px solid #808080; border-bottom:1px solid #adadad; border-right:1px solid #606060; border-top-right-radius:5px">
+									<div class="stop-watch" style="vertical-align:middle; padding:0px; background-size:20px; display:inline-block; width:20px; height:20px">
+										<img height="20" src="https://travis-ci.org/images/mailer/stopwatch-failed.png" width="20">
+									</div>
+									<span style="vertical-align:middle">
+										##duration##
+									</span>
+								</td>
+							</tr>
+						</thead>
+						<tbody style="margin-bottom:40px">
+							<tr style="padding:0px; border:0px">
+								<td class="profile-image" style="border:0px; height:20px; width:50px; padding:0px; border-left:1px solid #adadad; padding-top:20px; padding-bottom:5px; text-align:center">
+									<img src="https://secure.gravatar.com/avatar/3b0b52ad2211a26c4e1cefb472e09cbe?s=15&amp;d=https%3A%2F%2Ftravis-ci.org%2Fimages%2Fmailer%2Fmascot-avatar-15px.png">
+								</td>
+								<td class="grey" style="border:0px; color:#808080; padding:10px 20px 10px 0px; height:20px; padding-top:20px; padding-bottom:5px">
+									<strong>##committer##</strong>
+								</td>
+								<td align="right" class="grey" style="border:0px; color:#808080; padding:10px 20px 10px 0px; height:20px; border-right:1px solid #adadad; padding-top:20px; padding-bottom:5px">
+									<a href="##commit_url##" style="text-decoration:none; font-weight:bold; color:#57769d">
+										##commit##
+									</a>
+									<a href="##compare_url##" style="text-decoration:none; font-weight:bold; color:#57769d">
+										Changeset →
+									</a>
+								</td>
+							</tr>
+							<tr style="padding:0px; border:0px">
+								<td style="border:0px; height:20px; width:50px; padding:0px; border-left:1px solid #adadad; border-bottom-left-radius:5px; border-bottom:1px solid #adadad">
+								</td>
+								<td class="grey" colspan="2" style="border:0px; color:#808080; padding:10px 20px 10px 0px; height:20px; border-right:1px solid #adadad; padding-bottom:20px; padding-top:0px; border-bottom:1px solid #adadad; border-bottom-right-radius:5px">
+									##commit_message##
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div style="padding-top: 10px; width: 570px">
+				<img id="mascot" src="https://travis-ci.org/images/mailer/travis-mascot.png" style="float:right; margin-top:10px; margin-right:20px" width="80">
+				<div class="section footnote" style="margin-top:20px; border-radius:5px; border:1px solid #adadad; font-size:12px; padding:10px 20px; width:528px">
+					<p class="grey" style="color:#808080; margin-top:0px; margin-bottom:5px">
+						<strong style="font-size:14px">
+							Would you like to test your private code?
+						</strong>
+					</p>
+					<p class="grey" style="color:#808080; margin-top:0px; margin-bottom:5px">
+						Travis Pro could be your new best friend!
+					</p>
+				</div>
+				<div class="tiny-footer" style="font-size:12px; text-align:center; vertical-align:middle; height:20px; width:570px">
+					<p class="grey" style="color:#808080; margin-top:10px"> 
+						<span style="vertical-align:middle">Travis CI is powered by </span>
+						<img src="https://travis-ci.org/images/sponsors/bluebox-78x15.png" style="vertical-align:middle">
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
