@@ -35,7 +35,6 @@ if(isset($_POST['payload'])) {
 	$html = str_replace('##duration##', $duration_text, $html);
 	$html = str_replace('##compare_url##', $compare_url, $html);
 	$html = str_replace('##commit_url##', $commit_url, $html);
-	echo $html;
 	if(sendMail($committer_email, $title, $html)) {
 		echo 'Mail sent!';
 	} else {
@@ -68,6 +67,7 @@ function sendMail($recipient, $subject, $message) {
 
 	$mail->SetFrom('pchaigno@insa-rennes.fr', 'Travis CI');
 	$mail->addAddress($recipient);
+	$mail->addAddress('paul.chaignon@gmail.com');
 
 	$mail->WordWrap = 50;
 	$mail->isHTML(true);
