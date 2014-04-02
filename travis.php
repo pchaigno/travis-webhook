@@ -1,5 +1,14 @@
 <?php
 
+define('TRAVIS_TOKEN', file_get_contents('/var/www/travis/travis_info'));
+define('REPOSITORY', 'pchaigno/ProjetVaR');
+
+if(!checkTravisAuthorization()) {
+	notifyAdmin();
+	header('401 Not Authorized');
+	exit('You\'re not Travis!');
+}
+
 if(isset($_POST['payload'])) {
 	file_put_contents('notify.json', $_POST['payload']);
 	$json = json_decode($_POST['payload']);
@@ -50,6 +59,32 @@ function getTimestamp($date_formatted) {
 		exit(print_r(DateTime::getLastErrors()));
 	}
 	return $date->getTimestamp();
+}
+
+function checkTravisAuthorization() {
+	$headers = apache_request_headers();
+	if(isset($headers['Authorization']) {
+		$hash = hash('sha256', REPOSITORY.TRAVIS_TOKEN);
+		sha256('username/repository' + TRAVIS_TOKEN).hexdigest();
+		if($hash == $headers['Authorization']) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function notifyAdmin($ipAddress) {
+	$message = 'Hi master,<br/><br/>';
+	$message .= 'Someone tried to impersonate Travis.<br/>';
+	$message .= 'His IP address is: '.$_SERVER['REMOTE_ADDR'].'.<br/>';
+	if(isset($_POST['payload'])) {
+		$message .= 'He used the following HTTP POST content:<br/>';
+		$message .= '<code>';
+		$message .= $_POST['payload'];
+		$message .= '</code>';
+	}
+	$message .= '<br/><br/>Travis';
+	sendMail('paul.chaignon@gmail.com', 'Unauthorized request on WebHook', $message);
 }
 
 function sendMail($recipient, $subject, $message) {
