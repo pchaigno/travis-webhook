@@ -1,11 +1,10 @@
 <?php
 
 define('TRAVIS_TOKEN', getTravisToken());
-define('REPOSITORY', 'pchaigno/ProjetVaR');
 define('OWNER_EMAIL', 'paul.chaignon@gmail.com');
 
 // Exists if the sender is not Travis:
-if(!checkTravisAuthorization()) {
+if(!checkTravisAuthorization(&$repository)) {
 	notifyAdmin();
 	header('401 Not Authorized');
 	exit('You\'re not Travis!');
@@ -19,7 +18,6 @@ if(isset($_POST['payload'])) {
 	 * Reads all information from the JSON document.
 	 */
 	$json = json_decode($_POST['payload']);
-	$repository = $json->{'repository'}->{'owner_name'}.'/'.$json->{'repository'}->{'name'};
 	$repository_url = $json->{'repository'}->{'url'};
 	$branch = $json->{'branch'};
 	$branch_url = $repository_url.'/tree/'.$branch;
@@ -81,14 +79,15 @@ function getTimestamp($date_formatted) {
 /**
  * Checks that the sender of the request is Travis.
  * If he is he should have sent a hash (with the Travis token) in the headers.
+ * @param repository The repository will be written in this variable.
  * @return True if the sender is Travis.
  */
-function checkTravisAuthorization() {
-	$headers = apache_request_headers();
-	if(isset($headers['Authorization']) {
-		$hash = hash('sha256', REPOSITORY.TRAVIS_TOKEN);
-		sha256('username/repository' + TRAVIS_TOKEN).hexdigest();
-		if($hash == $headers['Authorization']) {
+function checkTravisAuthorization($repository) {
+	$repository = getHeader('Travis-Repo-Slug');
+	$hashSubmitted = getHeader('Authorization');
+	if($hashSubmitted!=null && $repository!=null) {
+		$hash = hash('sha256', $repository.TRAVIS_TOKEN);
+		if($hash == $hashSubmitted) {
 			return true;
 		}
 	}
@@ -148,6 +147,20 @@ function sendMail($recipient, $subject, $message) {
 	$mail->Body = $message;
 
 	return $mail->send();
+}
+
+/**
+ * Reads a header value from the HTTP header.
+ * Exists if the header can't be found.
+ * @param header The header to read.
+ * @return The header value.
+ */
+function getHeader($header) {
+	$headers = apache_request_headers();
+	if(isset($headers[$header])) {
+		return null;
+	}
+	return $headers[$header];
 }
 
 /**
