@@ -1,9 +1,8 @@
 <?php
 
-define('TRAVIS_TOKEN', getTravisToken());
 define('OWNER_EMAIL', 'paul.chaignon@gmail.com');
 
-// Exists if the sender is not Travis:
+// Checks that the sender is Travis:
 if(!checkTravisAuthorization(&$repository)) {
 	notifyAdmin();
 	header('401 Not Authorized');
@@ -18,6 +17,10 @@ if(isset($_POST['payload'])) {
 	 * Reads all information from the JSON document.
 	 */
 	$json = json_decode($_POST['payload']);
+	$status = $json->{'status_message'};
+	if($status != 'Passed') {
+		exit('This Travis notification is not worth being sent to the admin.');
+	}
 	$repository_url = $json->{'repository'}->{'url'};
 	$branch = $json->{'branch'};
 	$branch_url = $repository_url.'/tree/'.$branch;
@@ -87,7 +90,7 @@ function checkTravisAuthorization($repository) {
 	$repository = getHeader('Travis-Repo-Slug');
 	$hashSubmitted = getHeader('Authorization');
 	if($hashSubmitted!=null && $repository!=null) {
-		$hash = hash('sha256', $repository.TRAVIS_TOKEN);
+		$hash = hash('sha256', $repository.getTravisToken());
 		if($hash == $hashSubmitted) {
 			return true;
 		}
