@@ -21,8 +21,9 @@ if(isset($_POST['payload'])) {
 	$repository_url = $json->{'repository'}->{'url'};
 	$branch = $json->{'branch'};
 	$branch_url = $repository_url.'/tree/'.$branch;
+	$build_id = $json->{'id'};
 	$build_number = $json->{'number'};
-	$build_url = 'https://travis-ci.org/'.$repository.'/builds/'.$build_number;
+	$build_url = 'https://travis-ci.org/'.$repository.'/builds/'.$build_id;
 	$committer_name = $json->{'matrix'}[0]->{'committer_name'};
 	$committer_email = $json->{'matrix'}[0]->{'committer_email'};
 	$commit = substr($json->{'matrix'}[0]->{'commit'}, 0, 7);
